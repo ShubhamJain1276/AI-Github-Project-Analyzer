@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GitPulse AI - GitHub Project Analyzer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#31394d",
+                      "surface-tint": "#b4c5ff",
+                      "on-background": "#dae2fd",
+                      "primary-container": "#2563eb",
+                      "surface-container-highest": "#2d3449",
+                      "on-surface-variant": "#c3c6d7",
+                      "secondary-fixed-dim": "#4cd7f6",
+                      "on-tertiary-fixed": "#25005a",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "surface-container-high": "#222a3d",
+                      "surface-slate": "#1E293B",
+                      "on-primary-container": "#eeefff",
+                      "secondary": "#4cd7f6",
+                      "border-white": "rgba(255, 255, 255, 0.1)",
+                      "on-tertiary": "#3f008e",
+                      "on-surface": "#dae2fd",
+                      "on-error-container": "#ffdad6",
+                      "outline": "#8d90a0",
+                      "on-secondary-fixed": "#001f26",
+                      "outline-variant": "#434655",
+                      "error-container": "#93000a",
+                      "on-secondary-container": "#00424e",
+                      "background": "#0b1326",
+                      "tertiary": "#d2bbff",
+                      "tertiary-fixed-dim": "#d2bbff",
+                      "tertiary-fixed": "#eaddff",
+                      "on-secondary-fixed-variant": "#004e5c",
+                      "surface-container": "#171f33",
+                      "inverse-surface": "#dae2fd",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-secondary": "#003640",
+                      "inverse-on-surface": "#283044",
+                      "surface-container-low": "#131b2e",
+                      "secondary-fixed": "#acedff",
+                      "on-tertiary-container": "#f7edff",
+                      "glass-bg": "rgba(30, 41, 59, 0.7)",
+                      "secondary-container": "#03b5d3",
+                      "surface": "#0b1326",
+                      "on-error": "#690005",
+                      "on-primary": "#002a78",
+                      "surface-container-lowest": "#060e20",
+                      "on-primary-fixed": "#00174b",
+                      "surface-variant": "#2d3449",
+                      "inverse-primary": "#0053db",
+                      "error": "#ffb4ab",
+                      "primary-fixed": "#dbe1ff",
+                      "on-tertiary-fixed-variant": "#5a00c6",
+                      "surface-dim": "#0b1326",
+                      "primary": "#b4c5ff",
+                      "tertiary-container": "#8343f4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "container-max": "1440px",
+                      "base": "4px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "code-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-xl": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "code-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "22px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F172A;
+            color: #dae2fd;
+        }
+        .glass-panel {
+            background-color: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-ring {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
+        }
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body class="min-h-screen font-body-md">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop py-4 bg-glass-bg backdrop-blur-xl border-b border-border-white shadow-sm">
+<div class="flex items-center gap-8">
+<div class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">
+                GitPulse AI
+            </div>
+<div class="hidden md:flex gap-6">
+<a class="text-primary border-b-2 border-primary pb-1 font-body-md text-body-md hover:bg-surface-container-highest/50 transition-all duration-200" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:bg-surface-container-highest/50 duration-200" href="#">Analytics</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:bg-surface-container-highest/50 duration-200" href="#">Team</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:bg-surface-container-highest/50 duration-200" href="#">History</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest/50 p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest/50 p-2 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="User profile" class="w-10 h-10 rounded-full border border-border-white object-cover" data-alt="A futuristic avatar of a user in a deep blue and purple environment, highly detailed, cyperpunk aesthetic, perfect lighting, 8k resolution, professional portrait style, glowing elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaDM_RQeNM2t29DMvK-2qf34B-9f6l1ffT6Liu5KkIRHDjB-fB4Tiw_pY0ogtdsY9Sbsrryv3P7lDDhAaj9VjJePA86Npr4DCxxyGtAKYSKuwQs7r5QZEJqvSLxxGcanzJaJjOkPPJ4jIg1iNwwXjhUFbpzrKMqyqPAZ_rSEqjp_V_cmgmZTJuP3-wqVlLwXDg7dzp4yaXWBYIaMw9xntg1195rpmuSnN6SeYNtWlIl3ZfyHIV-YPW-hXig3rrjRveN-1lmJBkejJd"/>
+</div>
+</nav>
+<main class="pt-32 px-margin-desktop md:px-margin-desktop px-margin-mobile max-w-container-max mx-auto">
+<!-- Hero Section -->
+<section class="flex flex-col items-center justify-center text-center mb-16 mt-8">
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-4">Analyze any GitHub Repository</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-2xl">Get deep insights into repository health, code quality, and technical debt using our advanced AI models.</p>
+<div class="w-full max-w-3xl relative flex items-center">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">link</span>
+</div>
+<input class="w-full bg-[#0F172A] border border-border-white text-on-background font-code-md text-code-md py-4 pl-12 pr-32 rounded-xl focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] glow-ring transition-shadow placeholder-outline-variant" placeholder="https://github.com/facebook/react" type="text"/>
+<button class="absolute right-2 top-2 bottom-2 bg-primary-container text-white font-label-caps text-label-caps px-6 rounded-lg hover:bg-primary-container/90 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 18px;">analytics</span>
+                    Analyze
+                </button>
+</div>
+</section>
+<!-- Main Section: Recent Analysis -->
+<section>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Recent Analysis</h2>
+<button class="text-secondary font-label-caps text-label-caps flex items-center gap-1 hover:text-secondary-fixed transition-colors">
+                    View All <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="glass-panel rounded-xl p-6 flex flex-col hover:bg-surface-slate transition-colors duration-300">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-1">facebook / react</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">The library for web and native user interfaces.</p>
+</div>
+<span class="material-symbols-outlined text-primary-container">verified</span>
+</div>
+<div class="flex justify-around py-4 border-y border-border-white mb-4">
+<!-- Ring 1 -->
+<div class="flex flex-col items-center">
+<div class="relative w-16 h-16">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-[#06B6D4] progress-ring-circle stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="37.68" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-[#06B6D4]">85%</div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-2">Health</span>
+</div>
+<!-- Ring 2 -->
+<div class="flex flex-col items-center">
+<div class="relative w-16 h-16">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-[#7C3AED] progress-ring-circle stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="12.56" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-[#7C3AED]">95%</div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-2">README</span>
+</div>
+</div>
+<div class="flex justify-between items-center mb-6 font-code-md text-code-md text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 16px;">star</span> 212k
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 16px;">fork_right</span> 43.8k
+                        </div>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-[#3178C6]"></div> TS
+                        </div>
+</div>
+<button class="w-full py-2 rounded-lg border border-[#06B6D4] text-[#06B6D4] font-label-caps text-label-caps hover:bg-[#06B6D4]/10 transition-colors mt-auto">
+                        View Full Report
+                    </button>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel rounded-xl p-6 flex flex-col hover:bg-surface-slate transition-colors duration-300">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-1">vercel / next.js</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">The React Framework for the Web.</p>
+</div>
+<span class="material-symbols-outlined text-primary-container">verified</span>
+</div>
+<div class="flex justify-around py-4 border-y border-border-white mb-4">
+<!-- Ring 1 -->
+<div class="flex flex-col items-center">
+<div class="relative w-16 h-16">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-[#06B6D4] progress-ring-circle stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="55.26" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-[#06B6D4]">78%</div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-2">Health</span>
+</div>
+<!-- Ring 2 -->
+<div class="flex flex-col items-center">
+<div class="relative w-16 h-16">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-[#7C3AED] progress-ring-circle stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="25.12" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-[#7C3AED]">90%</div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-2">README</span>
+</div>
+</div>
+<div class="flex justify-between items-center mb-6 font-code-md text-code-md text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 16px;">star</span> 111k
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 16px;">fork_right</span> 24.5k
+                        </div>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-[#3178C6]"></div> TS
+                        </div>
+</div>
+<button class="w-full py-2 rounded-lg border border-[#06B6D4] text-[#06B6D4] font-label-caps text-label-caps hover:bg-[#06B6D4]/10 transition-colors mt-auto">
+                        View Full Report
+                    </button>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel rounded-xl p-6 flex flex-col hover:bg-surface-slate transition-colors duration-300">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-1">twbs / bootstrap</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">The most popular HTML, CSS, and JavaScript framework.</p>
+</div>
+</div>
+<div class="flex justify-around py-4 border-y border-border-white mb-4">
+<!-- Ring 1 -->
+<div class="flex flex-col items-center">
+<div class="relative w-16 h-16">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-[#06B6D4] progress-ring-circle stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="95.45" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-[#06B6D4]">62%</div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-2">Health</span>
+</div>
+<!-- Ring 2 -->
+<div class="flex flex-col items-center">
+<div class="relative w-16 h-16">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-[#7C3AED] progress-ring-circle stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="45.21" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-[#7C3AED]">82%</div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-2">README</span>
+</div>
+</div>
+<div class="flex justify-between items-center mb-6 font-code-md text-code-md text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 16px;">star</span> 165k
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 16px;">fork_right</span> 78.9k
+                        </div>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-[#F1E05A]"></div> JS
+                        </div>
+</div>
+<button class="w-full py-2 rounded-lg border border-[#06B6D4] text-[#06B6D4] font-label-caps text-label-caps hover:bg-[#06B6D4]/10 transition-colors mt-auto">
+                        View Full Report
+                    </button>
+</div>
+</div>
+</section>
+</main>
+</body></html>
