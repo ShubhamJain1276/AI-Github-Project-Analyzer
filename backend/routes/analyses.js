@@ -84,7 +84,6 @@ async function processAnalysis(reportId, repoInfo, userId, startTime) {
     }
 
     // Step 4: Save final report
-    // Remove readmeContent from stored source to save space
     await AnalysisReport.findByIdAndUpdate(reportId, {
       aiAnalysis,
       status,
@@ -120,29 +119,6 @@ router.get('/', auth, async (req, res) => {
     res.json({ reports, total, page, pages: Math.ceil(total / limit) });
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve history.' });
-  }
-});
-
-// GET /api/analyses/:id - Get single analysis
-router.get('/:id', auth, async (req, res) => {
-  try {
-    const report = await AnalysisReport.findOne({ _id: req.params.id, userId: req.userId }).lean();
-    if (!report) return res.status(404).json({ error: 'Analysis not found.' });
-    res.json(report);
-  } catch (error) {
-    if (error.name === 'CastError') return res.status(404).json({ error: 'Analysis not found.' });
-    res.status(500).json({ error: 'Failed to retrieve analysis.' });
-  }
-});
-
-// DELETE /api/analyses/:id
-router.delete('/:id', auth, async (req, res) => {
-  try {
-    const report = await AnalysisReport.findOneAndDelete({ _id: req.params.id, userId: req.userId });
-    if (!report) return res.status(404).json({ error: 'Analysis not found.' });
-    res.json({ message: 'Analysis deleted successfully.' });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to delete analysis.' });
   }
 });
 
@@ -192,9 +168,7 @@ router.post('/compare', auth, async (req, res) => {
       return res.status(404).json({ error: 'One or more specified analyses were not found.' });
     }
 
-    // Sort reports in the same order as requested IDs
     const orderedReports = ids.map(id => reports.find(r => r._id.toString() === id.toString()));
-
     res.json({ reports: orderedReports });
   } catch (error) {
     res.status(500).json({ error: 'Failed to generate comparison.' });
@@ -213,5 +187,27 @@ router.get('/export', auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+// GET /api/analyses/:id - Get single analysis
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const report = await AnalysisReport.findOne({ _id: req.params.id, userId: req.userId }).lean();
+    if (!report) return res.status(404).json({ error: 'Analysis not found.' });
+    res.json(report);
+  } catch (error) {
+    if (error.name === 'CastError') return res.status(404).json({ error: 'Analysis not found.' });
+    res.status(500).json({ error: 'Failed to retrieve analysis.' });
+  }
+});
 
+// DELETE /api/analyses/:id
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const report = await AnalysisReport.findOneAndDelete({ _id: req.params.id, userId: req.userId });
+    if (!report) return res.status(404).json({ error: 'Analysis not found.' });
+    res.json({ message: 'Analysis deleted successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete analysis.' });
+  }
+});
+
+module.exports = router;

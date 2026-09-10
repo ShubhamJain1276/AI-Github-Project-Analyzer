@@ -21,7 +21,8 @@ export default function Favorites() {
   const loadFavorites = async () => {
     try {
       const res = await favoritesAPI.getAll();
-      setFavorites(res.data || []);
+      const list = Array.isArray(res.data) ? res.data : (res.data?.favorites || []);
+      setFavorites(list);
     } catch {
       toast.error('Failed to load saved favorites');
     } finally {
@@ -34,12 +35,13 @@ export default function Favorites() {
     e.stopPropagation();
     try {
       await favoritesAPI.delete(id);
-      setFavorites(favorites.filter(f => f._id !== id));
+      setFavorites(prev => prev.filter(f => f._id !== id));
       toast.success('Removed from bookmarks');
     } catch {
       toast.error('Failed to remove favorite');
     }
   };
+
 
   return (
     <div className="min-h-screen bg-[#fdfdfd] text-black relative overflow-x-hidden">

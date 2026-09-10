@@ -19,10 +19,12 @@ app.use(cors({
   credentials: true
 }));
 
-// Rate limiting
+// Rate limiting (Relaxed limit for development testing)
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: process.env.NODE_ENV === 'production' ? 500 : 5000,
+  standardHeaders: true,
+  legacyHeaders: false,
   message: { error: 'Too many requests, please try again later.' }
 });
 app.use('/api/', limiter);

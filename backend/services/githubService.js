@@ -4,20 +4,44 @@ const GITHUB_API_BASE = 'https://api.github.com';
 
 function parseRepoUrl(url) {
   if (!url || typeof url !== 'string') throw new Error('Repository URL is required');
-  let cleaned = url.trim().replace(/\/+$/, '').replace(/\.git$/, '');
-  const patterns = [
-    /^https?:\/\/(?:www\.)?github\.com\/([^\/]+)\/([^\/\?#]+)/i,
-    /^(?:www\.)?github\.com\/([^\/]+)\/([^\/\?#]+)/i,
-    /^([^\/]+)\/([^\/\?#]+)$/
-  ];
-  for (const p of patterns) {
-    const m = cleaned.match(p);
-    if (m && /^[a-zA-Z0-9._-]+$/.test(m[1]) && /^[a-zA-Z0-9._-]+$/.test(m[2])) {
-      return { owner: m[1], name: m[2], fullName: `${m[1]}/${m[2]}`, url: `https://github.com/${m[1]}/${m[2]}` };
+  let cleaned = url.trim();
+  
+  try {
+    if (cleaned.startsWith('http://') || cleaned.startsWith('https://')) {
+      const u = new URL(cleaned);
+      if (u.hostname !== 'github.com' && u.hostname !== 'www.github.com') {
+        throw new Error('URL must be a GitHub repository (github.com)');
+      }
+      cleaned = u.pathname;
+    }
+  } catch (err) {
+    if (err.message?.includes('GitHub repository')) throw err;
+  }
+
+  cleaned = cleaned.replace(/^\/+|\/+$/g, '').replace(/\.git$/i, '');
+  const parts = cleaned.split('/');
+
+  if (parts.length === 1 && parts[0]) {
+    throw new Error('Please include both owner and repository name (e.g., owner/repository).');
+  }
+
+  if (parts.length >= 2) {
+    const owner = parts[0];
+    const name = parts[1];
+    const validName = /^[a-zA-Z0-9._-]+$/;
+    if (validName.test(owner) && validName.test(name)) {
+      return {
+        owner,
+        name,
+        fullName: `${owner}/${name}`,
+        url: `https://github.com/${owner}/${name}`
+      };
     }
   }
-  throw new Error('Invalid GitHub repository URL. Expected: https://github.com/owner/repository');
+
+  throw new Error('Invalid GitHub repository URL. Expected format: https://github.com/owner/repository');
 }
+
 
 function createClient() {
   const h = { 'Accept': 'application/vnd.github.v3+json', 'User-Agent': 'AI-GitHub-Analyzer/1.0' };

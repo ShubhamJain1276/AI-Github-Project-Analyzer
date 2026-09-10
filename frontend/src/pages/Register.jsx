@@ -123,7 +123,7 @@ export default function Register() {
                 <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-black transition-colors" />
                 <input
                   id="username" type="text" value={username} onChange={e => setUsername(e.target.value)}
-                  placeholder="johndoe" required minLength={3} maxLength={30}
+                  placeholder="Name" required minLength={3}
                   className="w-full pl-11 pr-4 py-4 border-[3px] border-black bg-white text-black font-mono text-sm focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-shadow placeholder:text-slate-400"
                 />
               </div>
