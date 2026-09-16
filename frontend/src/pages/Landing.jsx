@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ArrowRight, GitBranch, Shield, History, Sparkles, FileText,
   Activity, Zap, Search, LayoutDashboard, Terminal, Code2
@@ -52,32 +52,32 @@ function useTypewriter(words, speed = 80, pause = 1800) {
 }
 
 // Cursor-tracking tilt card
-function TiltCard({ children, className = '' }) {
-  const ref = useRef(null);
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [6, -6]), { stiffness: 200, damping: 20 });
-  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-6, 6]), { stiffness: 200, damping: 20 });
+// function TiltCard({ children, className = '' }) {
+//   const ref = useRef(null);
+//   const mx = useMotionValue(0);
+//   const my = useMotionValue(0);
+//   const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [6, -6]), { stiffness: 200, damping: 20 });
+//   const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-6, 6]), { stiffness: 200, damping: 20 });
 
-  const onMove = (e) => {
-    const rect = ref.current.getBoundingClientRect();
-    mx.set((e.clientX - rect.left) / rect.width - 0.5);
-    my.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-  const onLeave = () => { mx.set(0); my.set(0); };
+//   const onMove = (e) => {
+//     const rect = ref.current.getBoundingClientRect();
+//     mx.set((e.clientX - rect.left) / rect.width - 0.5);
+//     my.set((e.clientY - rect.top) / rect.height - 0.5);
+//   };
+//   const onLeave = () => { mx.set(0); my.set(0); };
 
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      style={{ rotateX, rotateY, transformPerspective: 800 }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
+//   return (
+//     <motion.div
+//       ref={ref}
+//       onMouseMove={onMove}
+//       onMouseLeave={onLeave}
+//       style={{ rotateX, rotateY, transformPerspective: 800 }}
+//       className={className}
+//     >
+//       {children}
+//     </motion.div>
+//   );
+// }
 
 const stagger = { animate: { transition: { staggerChildren: 0.08 } } };
 const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } };
@@ -179,10 +179,10 @@ export default function Landing() {
             </motion.div>
 
             {/* Right — Tilt demo card */}
-            <TiltCard className="hidden lg:block">
+            <div className="hidden lg:block">
               <div className="relative">
                 {/* Shadow layer */}
-                <div className="absolute inset-0 translate-x-3 translate-y-3 bg-black" />
+                <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" />
                 <div className="relative border-3 border-black bg-white" style={{ borderWidth: '3px' }}>
                   {/* Browser chrome */}
                   <div className="flex items-center gap-3 px-4 py-3 border-b-[3px] border-black bg-slate-50">
@@ -214,12 +214,12 @@ export default function Landing() {
                           <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1">{label}</p>
                           <p className="text-2xl font-black">{val}<span className="text-sm font-normal text-slate-400">{denom}</span></p>
                           <div className="mt-2 h-1.5 w-full bg-slate-100 border border-black">
-                            <motion.div
+                            {/* <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${val}%` }}
                               transition={{ duration: 1.2, delay: 0.5, ease: 'easeOut' }}
                               className="h-full bg-black"
-                            />
+                            /> */}
                           </div>
                         </div>
                       ))}
@@ -230,7 +230,7 @@ export default function Landing() {
                         <Sparkles size={12} className="text-black" />
                         <span className="text-[10px] font-black uppercase tracking-widest">AI Insights</span>
                       </div>
-                      {[100, 85, 65].map((w, i) => (
+                      {/* {[100, 85, 65].map((w, i) => (
                         <motion.div
                           key={i}
                           initial={{ width: 0 }}
@@ -238,12 +238,12 @@ export default function Landing() {
                           transition={{ duration: 0.8, delay: 0.8 + i * 0.15, ease: 'easeOut' }}
                           className="h-2 bg-slate-200 mb-1.5 last:mb-0"
                         />
-                      ))}
+                      ))} */}
                     </div>
                   </div>
                 </div>
               </div>
-            </TiltCard>
+            </div>
           </div>
         </div>
 

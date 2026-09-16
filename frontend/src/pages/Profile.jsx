@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   User, Activity, Calendar, GitBranch, Mail, Loader2, ArrowLeft,
-  TrendingUp, Clock, FileText, Sparkles, Key, Download, Trash2, ShieldAlert, Check
+  TrendingUp, Clock, FileText, Sparkles, Key, Trash2, ShieldAlert, Check
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
@@ -123,21 +123,6 @@ export default function Profile() {
     }
   };
 
-  const handleExportData = async () => {
-    try {
-      const res = await analysisAPI.exportData();
-      const url = window.URL.createObjectURL(new Blob([res.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `analysis_history_${Date.now()}.json`);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      toast.success('Export started!');
-    } catch {
-      toast.error('Failed to export analysis history');
-    }
-  };
 
   const handleDeleteAccount = async (e) => {
     e.preventDefault();
@@ -210,7 +195,7 @@ export default function Profile() {
             <div className="relative border-[3px] border-black bg-white p-8 md:p-10 flex flex-col md:flex-row items-center gap-8">
               {/* Avatar */}
               <div className="relative shrink-0">
-                <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" />
+                {/* <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" /> */}
                 <div className="relative w-28 h-28 md:w-36 md:h-36 border-[3px] border-black overflow-hidden bg-slate-100">
                   <img src={avatarUrl} alt={user.username} className="w-full h-full object-cover" />
                 </div>
@@ -239,14 +224,6 @@ export default function Profile() {
               </div>
 
               {/* Quick Actions */}
-              <div className="flex flex-col gap-2 shrink-0">
-                <button
-                  onClick={handleExportData}
-                  className="px-4 py-2.5 bg-white text-black font-black text-xs uppercase tracking-widest border-[2px] border-black hover:bg-slate-100 flex items-center gap-2 cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
-                >
-                  <Download size={13} /> Export JSON Data
-                </button>
-              </div>
             </div>
           </motion.div>
 

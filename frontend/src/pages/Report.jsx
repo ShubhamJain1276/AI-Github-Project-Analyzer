@@ -179,7 +179,7 @@ export default function Report() {
                 </div>
                 <div className="flex items-center gap-2">
                   <button onClick={toggleFavorite}
-                    className={`btn-neo p-2 transition-colors cursor-pointer ${isFavorited ? 'bg-black text-white' : 'bg-white text-black'}`}>
+                    className={`p-2 cursor-pointer ${isFavorited ? 'bg-black text-white' : 'bg-white text-black'}`}>
                     <Star size={18} fill={isFavorited ? 'currentColor' : 'none'} />
                   </button>
                   <a href={report.repository?.url} target="_blank" rel="noopener noreferrer"

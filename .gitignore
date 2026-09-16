@@ -24,3 +24,10 @@ Thumbs.db
 # IDE settings
 .vscode/
 .idea/
+
+backend/.env
+frontend/node_modules/
+backend/.env
+frontend/node_modules/
+backend/.env
+frontend/node_modules/

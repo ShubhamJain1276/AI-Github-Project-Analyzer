@@ -58,7 +58,7 @@ export default function History() {
           {/* Header */}
           <motion.div variants={fadeUp} className="mb-10">
             <div className="flex items-center gap-3 mb-4">
-              <div className="border-[3px] border-black bg-black text-white px-3 py-1.5 flex items-center gap-2 text-xs font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">
+              <div className="border-[3px] border-black bg-black text-white px-3 py-1.5 flex items-center gap-2 text-xs font-black uppercase tracking-widest">
                 <HistoryIcon size={12} />
                 Analysis Log
               </div>
@@ -83,7 +83,7 @@ export default function History() {
             </div>
           ) : reports.length === 0 ? (
             <motion.div variants={fadeUp} className="relative">
-              <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" />
+              {/* <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" /> */}
               <div className="relative border-[3px] border-black bg-white p-16 text-center">
                 <div className="w-16 h-16 border-[3px] border-black bg-black text-white flex items-center justify-center mx-auto mb-5">
                   <Search size={24} />
@@ -99,8 +99,8 @@ export default function History() {
             <>
               <div className="space-y-3">
                 {reports.map((r, i) => (
-                  <motion.div key={r._id} variants={fadeUp} className="relative group">
-                    <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-black group-hover:translate-x-2 group-hover:translate-y-2 transition-transform" />
+                  <motion.div key={r._id} variants={fadeUp} className="relative">
+                    {/* <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-black group-hover:translate-x-2 group-hover:translate-y-2 transition-transform" /> */}
                     <Link
                       to={`/report/${r._id}`}
                       className="relative flex items-center gap-4 border-[3px] border-black bg-white p-5 transition-colors hover:bg-slate-50 block"
@@ -139,10 +139,10 @@ export default function History() {
                           </div>
                         )}
                         <button onClick={(e) => handleDelete(r._id, e)}
-                          className="p-2 border-[2px] border-transparent hover:border-black text-slate-300 hover:text-black transition-all opacity-0 group-hover:opacity-100 cursor-pointer">
+                          className="p-2 border-[2px] border-transparent text-slate-300 cursor-pointer">
                           <Trash2 size={14} />
                         </button>
-                        <div className="w-8 h-8 border-[2px] border-black flex items-center justify-center text-slate-400 group-hover:bg-black group-hover:text-white transition-colors">
+                        <div className="w-8 h-8 border-[2px] border-black flex items-center justify-center text-slate-400">
                           <ExternalLink size={13} />
                         </div>
                       </div>

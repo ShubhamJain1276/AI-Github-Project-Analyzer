@@ -29,7 +29,7 @@ const healthComponents = [
 function ScoringTable({ icon: Icon, title, subtitle, data }) {
   return (
     <div className="relative mb-10">
-      <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" />
+      {/* <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" /> */}
       <div className="relative border-[3px] border-black bg-white overflow-hidden">
         {/* Header */}
         <div className="flex items-center gap-3 px-6 py-4 bg-black text-white">
@@ -83,7 +83,7 @@ export default function Methodology() {
           {/* Header */}
           <motion.div variants={fadeUp} className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <div className="border-[3px] border-black bg-black text-white px-3 py-1.5 flex items-center gap-2 text-xs font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">
+              <div className="border-[3px] border-black bg-black text-white px-3 py-1.5 flex items-center gap-2 text-xs font-black uppercase tracking-widest">
                 <BookOpen size={12} />
                 Documentation
               </div>
@@ -123,7 +123,7 @@ export default function Methodology() {
 
           {/* AI Analysis */}
           <motion.div variants={fadeUp} className="relative mb-10">
-            <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" />
+            {/* <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" /> */}
             <div className="relative border-[3px] border-black bg-white overflow-hidden">
               <div className="flex items-center gap-3 px-6 py-4 bg-black text-white">
                 <div className="p-2 border-[2px] border-white/30">
@@ -158,7 +158,7 @@ export default function Methodology() {
 
           {/* Disclaimer */}
           <motion.div variants={fadeUp} className="relative">
-            <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" />
+            {/* <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" /> */}
             <div className="relative border-[3px] border-black bg-slate-100 p-6">
               <div className="flex items-start gap-4">
                 <div className="p-2 border-[2px] border-black shrink-0 bg-black text-white">

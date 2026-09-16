@@ -14,7 +14,6 @@ import Favorites from './pages/Favorites';
 import Methodology from './pages/Methodology';
 import Profile from './pages/Profile';
 import Compare from './pages/Compare';
-import Leaderboard from './pages/Leaderboard';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import NotFound from './pages/NotFound';
@@ -56,7 +55,6 @@ export default function App() {
             <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
             <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
             <Route path="/compare" element={<ProtectedRoute><Compare /></ProtectedRoute>} />
-            <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>

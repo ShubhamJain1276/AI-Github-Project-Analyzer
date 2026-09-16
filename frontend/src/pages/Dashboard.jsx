@@ -93,7 +93,7 @@ export default function Dashboard() {
           className="mb-12"
         >
           <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
-            <div className="border-[3px] border-black bg-black text-white px-3 py-1.5 flex items-center gap-2 text-xs font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">
+            <div className="border-[3px] border-black bg-black text-white px-3 py-1.5 flex items-center gap-2 text-xs font-black uppercase tracking-widest ">
               <Terminal size={12} />
               Engine Active
             </div>
@@ -125,7 +125,7 @@ export default function Dashboard() {
         >
           <form onSubmit={handleSubmit} className="relative">
             {/* Shadow layer */}
-            <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black pointer-events-none" />
+            {/* <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black pointer-events-none" /> */}
             <div className="relative border-[3px] border-black bg-white flex flex-col sm:flex-row">
               <div className="relative flex-1 group">
                 <GitBranch
@@ -165,7 +165,7 @@ export default function Dashboard() {
         {/* Stats strip */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
-          className="grid grid-cols-3 border-[3px] border-black mb-12 bg-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+          className="grid grid-cols-3 border-[3px] border-black mb-12 bg-white "
         >
           {[
             { icon: Zap, label: 'AI Scoring', val: 'Live' },
@@ -211,7 +211,7 @@ export default function Dashboard() {
               initial={{ opacity: 0 }} animate={{ opacity: 1 }}
               className="relative"
             >
-              <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" />
+              {/* <div className="absolute inset-0 translate-x-2 translate-y-2 bg-black" /> */}
               <div className="relative border-[3px] border-black bg-white p-16 text-center">
                 <div className="w-16 h-16 border-[3px] border-black bg-black flex items-center justify-center mx-auto mb-5">
                   <Search size={24} className="text-white" />
@@ -231,7 +231,7 @@ export default function Dashboard() {
                   className="relative group"
                 >
                   {/* Card shadow */}
-                  <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-black group-hover:translate-x-2 group-hover:translate-y-2 transition-transform" />
+                  {/* <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-black group-hover:translate-x-2 group-hover:translate-y-2 transition-transform" /> */}
                   <Link
                     to={`/report/${report._id}`}
                     className="relative border-[3px] border-black bg-white p-5 flex items-center justify-between gap-4 transition-colors hover:bg-slate-50 block"

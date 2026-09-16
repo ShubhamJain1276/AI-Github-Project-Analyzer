@@ -10,7 +10,6 @@ const navItems = [
   { path: '/history',     label: 'History',     auth: true  },
   { path: '/favorites',   label: 'Starred',     auth: true  },
   { path: '/compare',     label: 'Compare',     auth: true  },
-  { path: '/leaderboard', label: 'Leaderboard', auth: true  },
   { path: '/methodology', label: 'Methodology', auth: false },
 ];
 
