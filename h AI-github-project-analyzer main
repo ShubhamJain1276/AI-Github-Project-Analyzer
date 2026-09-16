@@ -1,0 +1,23 @@
+[33mcommit 630ae9b9fd126eaffb075c79796c2541e4498746[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Chirag Bansal <chirag.bansal.958@gmail.com>
+Date:   Wed Sep 16 22:03:26 2026 +0530
+
+    Update complete project
+
+ .gitignore                                      |   7 [32m+[m
+ backend/.env                                    |   8 [31m-[m
+ frontend/node_modules/.vite/deps/_metadata.json |  80 [31m---------[m
+ frontend/src/App.jsx                            |   2 [31m-[m
+ frontend/src/api/client.js                      |   3 [31m-[m
+ frontend/src/components/Navbar.jsx              |   1 [31m-[m
+ frontend/src/index.css                          |  12 [32m+[m[31m-[m
+ frontend/src/pages/Dashboard.jsx                |  10 [32m+[m[31m-[m
+ frontend/src/pages/History.jsx                  |  12 [32m+[m[31m-[m
+ frontend/src/pages/Landing.jsx                  |  64 [32m+++[m[31m----[m
+ frontend/src/pages/Leaderboard.jsx              | 226 [31m------------------------[m
+ frontend/src/pages/Methodology.jsx              |   8 [32m+[m[31m-[m
+ frontend/src/pages/Profile.jsx                  |  27 [32m+[m[31m--[m
+ frontend/src/pages/Report.jsx                   |   2 [32m+[m[31m-[m
+ package-lock.json                               |  24 [32m+++[m
+ package.json                                    |   5 [32m+[m
+ 16 files changed, 92 insertions(+), 399 deletions(-)
